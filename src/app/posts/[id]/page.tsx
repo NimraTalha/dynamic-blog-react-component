@@ -1,4 +1,4 @@
-// /app/posts/[id]/page.tsx
+
 "use client";
 import React from "react";
 import { useRouter } from "next/router";
