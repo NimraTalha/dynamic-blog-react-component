@@ -1,13 +1,18 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @next/next/no-img-element */
-
+// /app/posts/[id]/page.tsx
 "use client";
 import React from "react";
+import { useRouter } from "next/router";
 import CommentSection from "@/components/CommentSection";
 import AuthoreCard from "@/components/AuthoreCard";
-import {title} from "process";
+import Image from "next/image";
 
-// Array containing all the blog posts
+interface PostProps {
+  params: {
+    id: string;
+  };
+}
+
+// Full list of posts
 const posts = [
   {
     id: "1",
@@ -19,7 +24,7 @@ const posts = [
   {
     id: "2",
     title: "CSS Secrets for Stunning Websites",
-    description: `CSS (Cascading Style Sheets) transforms the static structures of HTML into visually stunning web pages. It's what gives a website its unique style—colors, fonts, layouts, and animations. Beyond simple styling, CSS is a powerhouse that enables responsive design, ensuring websites look perfect on any screen size. Learn advanced CSS techniques like Flexbox, Grid, and animations that make web pages come alive.`,
+    description: `CSS (Cascading Style Sheets) transforms static HTML into visually stunning web pages. It's what gives a website its unique style—colors, fonts, layouts, and animations. Beyond simple styling, CSS is a powerhouse that enables responsive design, ensuring websites look perfect on any screen size. Learn advanced CSS techniques like Flexbox, Grid, and animations that make web pages come alive.`,
     date: "29/11/2024",
     image: "/images/2.jpg",
   },
@@ -81,51 +86,53 @@ const posts = [
   },
 ];
 
-export default function Post({ params }: { params: { id: string } }) {
-  // Instead of directly accessing `params.id`, you will need to unwrap it using `React.use()`.
+const Post = ({ params }: PostProps) => {
+  const { id } = params;
 
-  const [resolvedParams, setResolvedParams] = React.useState<{ id: string } | null>(null);
-
-  // Unwrap `params` inside a `useEffect` hook.
-  React.useEffect(() => {
-    const resolveParams = async () => {
-      const resolved = await params;
-      setResolvedParams(resolved);
-    };
-    resolveParams();
-  }, [params]);
-
-  if (!resolvedParams) {
-    return <h2 className="text-2xl font-bold text-center mt-10">Loading...</h2>;
-  }
-
-  const { id } = resolvedParams;
+  // Find the post by id
   const post = posts.find((p) => p.id === id);
 
   if (!post) {
     return <h2 className="text-2xl font-bold text-center mt-10">Post Not Found</h2>;
   }
 
+  // Helper function to render paragraphs
   const renderParagraphs = (description: string) => {
-    return description.split("/n").map((para, index) => (
-      <p key={index} className="mt-4 text-justify">{para.trim()}</p>
+    return description.split("\n").map((para, index) => (
+      <p key={index} className="text-justify mt-4">{para.trim()}</p>
     ));
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-5">
-      <h1 className="md:text-4xl text-3xl font-bold text-emerald-500 text-center">{post.title}</h1>
-      {post.image && <img src={post.image} className="w-full mt-4 rounded-lg" alt={post.title} />}
-      {renderParagraphs(post.description)}
+    <div>
+      <h1 className="text-4xl font-bold mt-8">{post.title}</h1>
+      {post.image && (
+        <Image
+          src={post.image}
+          alt={post.title}
+          width={1200}
+          height={800}
+          className="mt-6"
+        />
+      )}
+      <div className="mt-6">
+        {renderParagraphs(post.description)}
+      </div>
       <CommentSection postId={post.id} />
       <AuthoreCard />
     </div>
   );
-}
+};
 
+const PostPage = () => {
+  const router = useRouter();
+  const { id } = router.query;
 
+  if (!id) {
+    return <p>Loading...</p>;
+  }
 
+  return <Post params={{ id: String(id) }} />;
+};
 
-
-
-
+export default PostPage;

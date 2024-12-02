@@ -14,8 +14,7 @@ interface CommentSectionProps {
   postId: string;
 }
 
-
-export default function CommentSection({ postId }: CommentSectionProps) {
+export default function CommentSection({ }: CommentSectionProps) {
   const [comments, setComments] = useState<Comment[]>([]);
   const [newComment, setNewComment] = useState("");
   const [authorName, setAuthorName] = useState("");
@@ -27,19 +26,23 @@ export default function CommentSection({ postId }: CommentSectionProps) {
   const handleAddComment = () => {
     if (!authorName.trim()) {
       setError("Please enter your name.");
-    } else if (!newComment.trim()) {
-      setError("Please write a comment.");
-    } else {
-      const newEntry: Comment = {
-        id: Date.now().toString(),
-        author: authorName,
-        text: newComment,
-      };
-      setComments([...comments, newEntry]);
-      setNewComment("");
-      setAuthorName("");
-      setError(null);
+      return;
     }
+    if (!newComment.trim()) {
+      setError("Please write a comment.");
+      return;
+    }
+    
+    const newEntry: Comment = {
+      id: Date.now().toString(),
+      author: authorName,
+      text: newComment,
+    };
+    
+    setComments([...comments, newEntry]);
+    setNewComment("");
+    setAuthorName("");
+    setError(null);
   };
 
   // Handle editing a comment
@@ -69,7 +72,9 @@ export default function CommentSection({ postId }: CommentSectionProps) {
         <h3 className="text-lg font-semibold text-emerald-300 mb-4 animate-pulse">
           Comments
         </h3>
+        
         {error && <p className="text-red-500 mb-2">{error}</p>}
+        
         <div>
           {comments.map((comment) => (
             <div key={comment.id} className="mb-4">
@@ -112,18 +117,23 @@ export default function CommentSection({ postId }: CommentSectionProps) {
             </div>
           ))}
         </div>
-        <Input
-          value={authorName}
-          placeholder="Enter your name"
-          onChange={(e) => setAuthorName(e.target.value)}
-          className="mb-2 bg-black/70 text-white/75"
-        />
-        <Input
-          value={newComment}
-          placeholder="Write a comment..."
-          onChange={(e) => setNewComment(e.target.value)}
-          className="mb-2 bg-black/70 text-white/75"
-        />
+
+        {/* Input Fields for Adding a Comment */}
+        <div className="mt-4">
+          <Input
+            value={authorName}
+            placeholder="Enter your name"
+            onChange={(e) => setAuthorName(e.target.value)}
+            className="mb-2 bg-black/70 text-white/75"
+          />
+          <Input
+            value={newComment}
+            placeholder="Write a comment..."
+            onChange={(e) => setNewComment(e.target.value)}
+            className="mb-2 bg-black/70 text-white/75"
+          />
+        </div>
+        
         <Button
           onClick={handleAddComment}
           className="mt-2 bg-emerald-400 hover:bg-emerald-500 text-black"
@@ -133,4 +143,4 @@ export default function CommentSection({ postId }: CommentSectionProps) {
       </CardContent>
     </Card>
   );
-}
+} 
