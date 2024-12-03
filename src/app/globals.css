@@ -60,6 +60,7 @@
     --chart-5: 340 75% 55%;
   }
 
+  /* Animation for color change */
   @keyframes colorChange {
     0%, 100% {
       color: rgba(100, 136, 237, 0.8); /* Cornflower Blue */
@@ -70,22 +71,48 @@
   }
 
   .animate-color-change {
-    animation: colorChange 5s infinite;
+    animation: colorChange 5s ease-in-out infinite;
   }
 
-  /* BlogCard example */
+  /* Blog card hover effect */
   .blog-card {
     border-radius: var(--radius);
     padding: 20px;
-    background-color: white;
+    background-color: var(--card);
     transition: transform 0.3s ease-in-out;
   }
+
   .blog-card:hover {
     transform: scale(1.05);
-}
+  }
 
-  /* Adjusting text size for global scope */
+  .blog-card:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+
+  /* Adjusting text size globally */
   html {
     -webkit-text-size-adjust: 100%;
   }
+
+  .avatar_avatar__Qg_Wv {
+    -webkit-mask-image: -webkit-radial-gradient(circle, white, black);
+    mask-image: radial-gradient(circle, white, black);
+  }
 }
+
+@layer preflight {
+  :where(.tailwind:not(.tailwind-no-preflight)) html,
+  :where(.tailwind-preflight) html {
+    -webkit-text-size-adjust: 100%;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  [vaul-drawer] {
+    user-select: none;
+  }
+}
+
+/* Viewport meta added via Next.js _document.js */

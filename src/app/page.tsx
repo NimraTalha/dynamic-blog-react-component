@@ -1,16 +1,19 @@
-"use client"
+"use client";
 import { Navbar } from "@/components/Navbar";
 import AuthoreCard from "@/components/AuthoreCard";
 import Mega from "@/components/Mega";
 import { Feature } from "@/components/Feature";
 import { Footer } from "@/components/Footer";
-
-
-
+import Head from "next/head"; // Import Head for meta tags
 
 export default function Home() {
   return (
     <div className="bg-gray-50 text-gray-900">
+      {/* Add Head for viewport meta tag */}
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+      </Head>
+
       <header className="text-center py-6">
         <h1 className="text-4xl font-extrabold text-blue-600">
           Nimra Dynamic Blog
@@ -18,15 +21,10 @@ export default function Home() {
       </header>
 
       <Navbar />
-      <Feature/>
+      <Feature />
       <Mega />
-
-
-     
-
       <AuthoreCard />
-      <Footer/>
-
+      <Footer />
     </div>
   );
 }
