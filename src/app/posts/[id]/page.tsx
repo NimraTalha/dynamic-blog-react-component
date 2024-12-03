@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 
 "use client"
-import React from "react";
+import React,{useEffect,useState} from "react";
 import CommentSection from "@/components/CommentSection";
 import AuthoreCard from "@/components/AuthoreCard";
 
@@ -79,8 +79,25 @@ const posts = [
 ];
 
 
-export default function Post({ params }: { params: { id: string } }) {
-  const { id } = params;
+export default function Post({ params }: { params: Promise<{ id: string }> }) {
+  const [id, setId] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchParams() {
+      const unwrappedParams = await params;
+      setId(unwrappedParams.id);
+    }
+    fetchParams();
+  }, [params]);
+
+  if (!id) {
+    return (
+      <div className="text-2xl font-bold text-center mt-10">
+        Loading...
+      </div>
+    );
+  }
+
   const post = posts.find((p) => p.id === id);
   if (!post) {
     return (

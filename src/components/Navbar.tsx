@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
 
 export const Navbar = () => {
   const [currentDateTime, setCurrentDateTime] = useState("");
@@ -35,19 +36,23 @@ export const Navbar = () => {
           {/* Styled Date and Time */}
           <span className="text-lg font-semibold text-emerald-300 animate-pulse">{currentDateTime}</span>
           <nav className="md:ml-auto flex flex-wrap items-center text-white/75 justify-end">
-            {/* These links will now be simple text and won't navigate anywhere */}
-            <span className="mr-5 cursor-pointer hover:text-emerald-400 transition-colors duration-300 transform hover:scale-105">
+            <Link
+              href="/"
+              className="mr-5 hover:text-emerald-400 transition-colors duration-300 transform hover:scale-105"
+            >
               Home
-            </span>
-            <span className="mr-5 cursor-pointer hover:text-emerald-400 transition-colors duration-300 transform hover:scale-105">
+            </Link>
+            <Link
+              href="/"
+              className="mr-5 hover:text-emerald-400 transition-colors duration-300 transform hover:scale-105"
+            >
               About
-            </span>
-            <span className="mr-5 cursor-pointer hover:text-emerald-400 transition-colors duration-300 transform hover:scale-105">
-              Blog
-            </span>
-            <span className="mr-5 cursor-pointer hover:text-emerald-400 transition-colors duration-300 transform hover:scale-105">
-              Contact
-            </span>
+            </Link>
+            <Link
+              href="/" className="mr-5 hover:text-emerald-400 transition-colors duration-300 transform hover:scale-105"
+            >
+             Contact
+            </Link>
           </nav>
         </div>
       </div>
