@@ -4,16 +4,12 @@ import AuthoreCard from "@/components/AuthoreCard";
 import Mega from "@/components/Mega";
 import { Feature } from "@/components/Feature";
 import { Footer } from "@/components/Footer";
-import Head from "next/head"; 
+
 
 export default function Home() {
   return (
     <div className="bg-gray-50 text-gray-900">
-      {/* Add Head for viewport meta tag */}
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        </Head>
+      
 
       <header className="text-center py-6">
         <h1 className="text-4xl font-extrabold text-blue-600">
