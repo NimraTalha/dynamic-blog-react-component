@@ -3,32 +3,11 @@
 @tailwind utilities;
 
 @layer base {
-  /* Root color variables */
   :root {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
     --primary: 240 5.9% 10%;
     --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 10% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
 
@@ -36,83 +15,44 @@
   .dark {
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-  }
-
-  /* Animation for color change */
-  @keyframes colorChange {
-    0%, 100% {
-      color: rgba(100, 136, 237, 0.8); /* Cornflower Blue */
-    }
-    50% {
-      color: rgb(16, 185, 129); /* Emerald Green */
-    }
-  }
-
-  .animate-color-change {
-    animation: colorChange 5s ease-in-out infinite;
   }
 
   /* Blog card hover effect */
   .blog-card {
     border-radius: var(--radius);
     padding: 20px;
-    background-color: var(--card);
+    background-color: var(--background);
     transition: transform 0.3s ease-in-out;
   }
-
+  
   .blog-card:hover {
     transform: scale(1.05);
   }
 
-  .blog-card:focus {
-    outline: 2px solid var(--primary);
-    outline-offset: 2px;
-  }
-
-  /* Adjusting text size globally */
+  /* Adjust text size globally */
   html {
-    -webkit-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%; /* For Safari, old iOS browsers */
+    text-size-adjust: 100%; /* For modern browsers */
   }
 
+  /* Avatar mask for cross-browser support */
   .avatar_avatar__Qg_Wv {
-    -webkit-mask-image: -webkit-radial-gradient(circle, white, black);
-    mask-image: radial-gradient(circle, white, black);
+    -webkit-mask-image: -webkit-radial-gradient(circle, white, black); /* WebKit */
+    mask-image: radial-gradient(circle, white, black); /* Firefox & Modern */
   }
 }
 
 @layer preflight {
   :where(.tailwind:not(.tailwind-no-preflight)) html,
   :where(.tailwind-preflight) html {
-    -webkit-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%; /* Safari */
+    text-size-adjust: 100%; /* Modern browsers */
   }
 }
 
 @media (hover: hover) and (pointer: fine) {
   [vaul-drawer] {
-    user-select: none;
+    -webkit-user-select: none; /* Safari support */
+    user-select: none; /* Modern browsers */
   }
 }
-
-/* Viewport meta added via Next.js _document.js */
