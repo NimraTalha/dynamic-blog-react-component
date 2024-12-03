@@ -43,19 +43,20 @@ export const Navbar = () => {
               Home
             </Link>
             <Link
-              href="/about"
+              href="/"
               className="mr-5 hover:text-emerald-400 transition-colors duration-300 transform hover:scale-105"
             >
               About
             </Link>
+            
             <Link
-              href="/blog"
+              href="/"
               className="mr-5 hover:text-emerald-400 transition-colors duration-300 transform hover:scale-105"
             >
               Blog
             </Link>
             <Link
-              href="/contact"
+              href="/"
               className="mr-5 hover:text-emerald-400 transition-colors duration-300 transform hover:scale-105"
             >
               Contact

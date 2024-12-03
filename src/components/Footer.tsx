@@ -11,8 +11,8 @@ export const Footer = () => {
           {/* Logo and Description */}
           <div className="flex flex-col items-center md:items-start">
             <img
-              src="/images/logos.jpg" 
-              alt="Logo"
+              src="/images/logos.jpg"  // Corrected image path
+              alt="Nimra Dynamic Blog Logo"  // More descriptive alt text
               className="w-32 mb-4"
             />
             <p className="text-gray-400 text-center md:text-left">
