@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React,{useEffect,useState} from "react";
 import BlogCard from "../components/Blog";
 
 export default function Mega() {
@@ -7,7 +7,7 @@ export default function Mega() {
   useEffect(() => {
     // Set the title dynamically after the component mounts on the client side
     if (typeof window !== "undefined" && window.process && window.process.title) {
-      setProcessTitle(`Exploring ${window.process.title}`);
+      setProcessTitle(`Exploring ${window.process.title}`); // Fixed string interpolation
     }
   }, []);
 

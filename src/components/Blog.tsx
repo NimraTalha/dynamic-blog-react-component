@@ -1,7 +1,6 @@
 import React from "react";
-import Link from "next/link"; 
-import Image from "next/image"; 
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
+import Image from "next/image";  // Import Image from next/image
 
 interface BlogCardProps {
   post: { id: string; title: string; description: string; date: string; imageUrl: string };
@@ -10,11 +9,10 @@ interface BlogCardProps {
 
 export default function BlogCard({ post, isDarkBackground }: BlogCardProps) {
   return (
-    <Card
-      className={`p-4 ${isDarkBackground ? "bg-slate-800 text-white" : "bg-white text-slate-800"} rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-500`}
-    >
+    <Card className={`p-4 ${isDarkBackground ? 'bg-white/70 text-slate-800' : 'text-white/75'} rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300`}>
+      {/* Use Image component from next/image */}
       <Image
-        src={post.imageUrl} // Ensure the image path is correct
+        src={post.imageUrl}
         alt={post.title}
         width={400}
         height={200}
@@ -23,18 +21,18 @@ export default function BlogCard({ post, isDarkBackground }: BlogCardProps) {
       <CardTitle className="text-xl font-normal mt-4 text-center">{post.title}</CardTitle>
       <CardContent className="text-center">
         <p className="text-sm">{post.description}</p>
-        <div className="flex flex-col items-center mt-4">
-          <p className="text-xs text-gray-500 mt-2">{post.date}</p>
-          
-            <Link href={`/posts/${post.id}`} passHref>
-              <a
-                className={`hover:underline mt-4 block w-full px-6 py-2 ${isDarkBackground ? "bg-emerald-500" : "bg-red-500"} text-white rounded-lg hover:bg-red-600 transition-colors duration-300 text-center`}
-              >
-                Read More
-              </a>
-            </Link>
-        </div>
       </CardContent>
+      <div className="flex flex-col items-center mt-4">
+        <p className={`text-sm mb-2 ${isDarkBackground ? 'text-slate-400' : 'text-slate-600'}`}>
+          Published on: {new Date(post.date).toLocaleDateString()}
+        </p>
+        <a
+          href={`/posts/${post.id}`}
+          className={`w-full px-6 text-white bg-red-600 rounded hover:bg-emerald-400 ${isDarkBackground ? 'bg-black hover:bg-red-500' : 'bg-black hover:bg-emerald-400'}`}
+        >
+          Read More
+        </a>
+      </div>
     </Card>
   );
 }
